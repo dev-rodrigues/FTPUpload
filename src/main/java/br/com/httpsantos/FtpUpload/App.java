@@ -11,7 +11,7 @@ public class App {
 		
 		FTPClient ftp = new FTPClient();
 		
-		ftp.connect("192.168.0.24");
+		ftp.connect("192.168.0.18");
 
 		ftp.login("user", "123");
 
