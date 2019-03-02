@@ -1,5 +1,6 @@
 package br.com.httpsantos.FtpUpload;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.SocketException;
 
@@ -7,21 +8,19 @@ import org.apache.commons.net.ftp.FTPClient;
 
 public class App {
 	public static void main(String[] args) throws SocketException, IOException {
-
+		
 		FTPClient ftp = new FTPClient();
+		
+		ftp.connect("192.168.0.24");
 
-		ftp.connect(""); // ftp.petrobras.com.br
+		ftp.login("user", "123");
 
-		ftp.login("usuario", "senha");
+		FileInputStream arqEnviar = new FileInputStream("C:\\temp\\out.txt");
 
-		ftp.changeWorkingDirectory("diretorio");
-
-		String[] arq = ftp.listNames();
-
-		System.out.println("Listando arquivos: \n");
-
-		for (String f : arq) {
-			System.out.println(f);
+		if (ftp.storeFile("meuarquivo.txt", arqEnviar)) {
+			System.out.println("Arquivo armazenado com sucesso!");
+		} else {
+			System.out.println("Erro ao armazenar o arquivo.");
 		}
 	}
 }
