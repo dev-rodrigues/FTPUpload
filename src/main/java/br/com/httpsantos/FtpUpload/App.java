@@ -22,9 +22,11 @@ public class App {
 
 			System.out.println();
 			System.out.println("-----------------------------------------");
-
-			// ftp.downloadFile("\\cheque.pdf", "C:\\temp");
-
+			System.out.println("Download Files");
+			ftp.downloadFile("\\cheque.pdf", "C:\\Users\\rodri\\Downloads\\out.pdf");
+			
+			System.out.println();
+			System.out.println("-----------------------------------------");
 			System.out.println("Upload Files");
 			File f = new File("C:\\temp\\out.txt");
 
