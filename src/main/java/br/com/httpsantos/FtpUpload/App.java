@@ -23,14 +23,18 @@ public class App {
 			System.out.println();
 			System.out.println("-----------------------------------------");
 			System.out.println("Download Files");
-			ftp.downloadFile("\\cheque.pdf", "C:\\Users\\rodri\\Downloads\\out.pdf");
-			
+			if (ftp.downloadFile("\\cheque.pdf", "C:\\Users\\rodri\\Downloads\\out.pdf")) {
+				System.out.println("download successfully completed");
+			}
+
 			System.out.println();
 			System.out.println("-----------------------------------------");
 			System.out.println("Upload Files");
 			File f = new File("C:\\temp\\out.txt");
 
-			ftp.uploadFile(f, "\\" + f.getName() + "1");
+			if (ftp.uploadFile(f, "\\" + f.getName() + "1")) {
+				System.out.println("upload successfully completed");
+			}
 		}
 		ftp.close();
 		System.out.println("Disconnected!");

@@ -24,6 +24,13 @@ public class FtpClient {
 	private String password;
 	private FTPClient ftp;
 
+	/*
+	 * @author Carlos Henrique
+	 * 
+	 * @github github.com/httpsantos
+	 * 
+	 * @constructor
+	 */
 	public FtpClient(String server, int port, String user, String password) {
 		this.server = server;
 		this.port = port;
@@ -31,6 +38,13 @@ public class FtpClient {
 		this.password = password;
 	}
 
+	/*
+	 * @author Carlos Henrique
+	 * 
+	 * @github github.com/httpsantos
+	 * 
+	 * @returns true if connection succeeds
+	 */
 	public boolean open() throws IOException {
 		boolean connect = false;
 		ftp = new FTPClient();
@@ -43,12 +57,18 @@ public class FtpClient {
 			return connect;
 		}
 
-		if (ftp.login(user, password)) {
-			connect = true;
-		}
-		return connect;
+		return ftp.login(user, password);
 	}
 
+	/*
+	 * @author Carlos Henrique
+	 * 
+	 * @github github.com/httpsantos
+	 * 
+	 * @parameter path
+	 * 
+	 * @returns a list of files in the directory
+	 */
 	public List<String> listFiles(String path) throws IOException {
 		List<String> arq = new ArrayList<String>();
 		FTPFile[] files = ftp.listFiles(path);
@@ -58,15 +78,42 @@ public class FtpClient {
 		return arq;
 	}
 
-	public void downloadFile(String source, String destination) throws IOException {
+	/*
+	 * @author Carlos Henrique
+	 * 
+	 * @github github.com/httpsantos
+	 * 
+	 * @parameter String source, String destination
+	 * 
+	 * @returns true if downloaded
+	 */
+	public boolean downloadFile(String source, String destination) throws IOException {
 		FileOutputStream out = new FileOutputStream(destination);
-		ftp.retrieveFile(source, out);
+		return ftp.retrieveFile(source, out);
 	}
 
-	public void uploadFile(File file, String path) throws IOException {
-		ftp.storeFile(path, new FileInputStream(file));
+	/*
+	 * @author Carlos Henrique
+	 * 
+	 * @github github.com/httpsantos
+	 * 
+	 * @parameter String source, String destination
+	 * 
+	 * @returns true if uploaded
+	 */
+	public boolean uploadFile(File file, String path) throws IOException {
+		return ftp.storeFile(path, new FileInputStream(file));
 	}
 
+	/*
+	 * @author Carlos Henrique
+	 * 
+	 * @github github.com/httpsantos
+	 * 
+	 * @parameter:
+	 * 
+	 * @returns:
+	 */
 	public void close() throws IOException {
 		ftp.disconnect();
 	}
