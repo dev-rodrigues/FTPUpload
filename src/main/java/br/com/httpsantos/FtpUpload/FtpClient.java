@@ -1,5 +1,8 @@
 package br.com.httpsantos.FtpUpload;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -53,6 +56,15 @@ public class FtpClient {
 			arq.add(ftpFile.getName());
 		}
 		return arq;
+	}
+
+	public void downloadFile(String source, String destination) throws IOException {
+		FileOutputStream out = new FileOutputStream(destination);
+		ftp.retrieveFile(source, out);
+	}
+
+	public void uploadFile(File file, String path) throws IOException {
+		ftp.storeFile(path, new FileInputStream(file));
 	}
 
 	public void close() throws IOException {
